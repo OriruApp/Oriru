@@ -18,7 +18,12 @@ public class Oriru extends JFrame{
     public Oriru(){
         super("Oriru");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setUndecorated(true);
+
+        // set undecorated modifies the top window bar
+        setUndecorated(false);
+
+
+        setTitle("Oriru");
         game = new Game();
         gp = new GamePanel(game);
         add(gp);
