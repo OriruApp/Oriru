@@ -1,4 +1,4 @@
-package com.company.oriru;
+package com.oriruapp.oriru;
 
 public class Player {
 

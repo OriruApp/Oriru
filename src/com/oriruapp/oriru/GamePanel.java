@@ -1,4 +1,4 @@
-package com.company.oriru;
+package com.oriruapp.oriru;
 
 import javax.swing.*;
 import java.awt.*;
