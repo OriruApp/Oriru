@@ -9,11 +9,12 @@ import java.io.IOException;
 
 public class Player extends Component{
 
-    private int health;
+    private int health = 3;
     private BufferedImage img;
     private int xpos;
     private int ypos;
-    private static int VELOCITY = 25;
+    private static int VELOCITY = 10;
+    private static int PLAYERHEIGHT = 32;
 
 
     private static final Color COLOR = new Color(250, 128, 20);
@@ -23,6 +24,7 @@ public class Player extends Component{
         repaint();
         xpos = 100;
         ypos = 100;
+        //falling();
         //paint(this);
     }
 
@@ -41,7 +43,7 @@ public class Player extends Component{
 
     @Override
     public void paint(Graphics g){
-        System.out.println("in paint");
+        //System.out.println("in paint");
         super.paint(g);
         g.drawImage(img,xpos,ypos,this);
     }
@@ -60,4 +62,40 @@ public class Player extends Component{
     public void moveRight(){
         xpos+= VELOCITY;
     }
+
+    public void falling(){
+        //System.out.println("in falling");
+
+
+        // if statement here to help debugging; will be removed later.
+        if(ypos < 600 - PLAYERHEIGHT && !isOnPlatform()){
+            ypos += 3;
+        }
+
+    }
+
+    public int getYpos(){
+        return ypos;
+    }
+
+    public int getHeight(){
+        return PLAYERHEIGHT;
+    }
+
+    //checks if the player is standing on the platform
+    public boolean isOnPlatform(){
+        return false;
+    }
+
+    public boolean isHit(){
+        return false;
+    }
+
+    public void loseHealth(){
+        health--;
+    }
+
+
+
+
 }

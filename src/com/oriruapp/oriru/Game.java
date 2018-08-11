@@ -24,6 +24,7 @@ public class Game extends Observable {
     Game(){
         sprites = new ArrayList<Sprite>();
         player = new Player();
+
         //player.loadImageApp();
 
 
@@ -37,7 +38,7 @@ public class Game extends Observable {
 
     // updates the game
     public void update(){
-
+        player.falling();
     }
 
     public void keyPressed(int keyCode){
@@ -57,10 +58,16 @@ public class Game extends Observable {
 
     // restarts the entire game
     private void reset(){
-
+        System.out.println("resetting game");
+        isGameOver = false;
     }
 
+    // need modification later
     public boolean isOver(){
+        if(player.getYpos() > HEIGHT - player.getHeight()- 10){
+            //System.out.println("game over is true");
+            isGameOver = true;
+        }
         return isGameOver;
     }
 
