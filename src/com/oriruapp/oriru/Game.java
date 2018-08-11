@@ -11,8 +11,8 @@ import java.util.Observable;
 import java.util.Random;
 
 public class Game extends Observable {
-    public static final int WIDTH = 800;
-    public static final int HEIGHT = 600;
+    public static final int WIDTH = 600;
+    public static final int HEIGHT = 800;
     public static final Random RANDOM = new Random();
 
 
@@ -25,7 +25,7 @@ public class Game extends Observable {
         sprites = new ArrayList<Sprite>();
         player = new Player();
         //player.loadImageApp();
-
+        sprites.add(new Sprite(50,200));
 
     }
 
@@ -52,7 +52,11 @@ public class Game extends Observable {
     }
 
     public void draw(Graphics g){
+
         player.paint(g);
+        for(Sprite sprite : sprites){
+            sprite.paint(g);
+        }
     }
 
     // restarts the entire game

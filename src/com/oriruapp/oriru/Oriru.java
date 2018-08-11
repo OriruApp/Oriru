@@ -82,7 +82,7 @@ public class Oriru extends JFrame{
 
 
         //Display the window.
-        frame.setSize(800,600);
+        frame.setSize(600,800);
         frame.setVisible(true);
     }
 
