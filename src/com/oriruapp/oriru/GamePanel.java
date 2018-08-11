@@ -22,6 +22,18 @@ public class GamePanel extends JPanel {
         setBackground(Color.white);
         this.game = g;
 
+
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
+        drawGame(g);
+
+        if (game.isOver()) {
+            gameOver(g);
+        }
     }
 
     // Draws the game

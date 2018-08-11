@@ -12,7 +12,7 @@ public class Oriru extends JFrame{
     private Game game;
     private GamePanel gp;
 
-    private static final int INTERVAL = 20;
+    private static final int INTERVAL = 10;
     private Timer t;
 
     public Oriru(){
@@ -54,7 +54,8 @@ public class Oriru extends JFrame{
         t = new Timer(INTERVAL, new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent ae) {
-                game.update();
+                // KEEP UPDATE FOR GAME CLASS?????
+                //game.update();
                 gp.repaint();
             }
         });

@@ -23,6 +23,8 @@ public class Game extends Observable {
 
     Game(){
         sprites = new ArrayList<Sprite>();
+        player = new Player();
+        //player.loadImageApp();
 
 
     }
@@ -40,9 +42,9 @@ public class Game extends Observable {
 
     public void keyPressed(int keyCode){
         if (keyCode == KeyEvent.VK_KP_LEFT || keyCode == KeyEvent.VK_LEFT)
-            player.faceLeft();
+            player.moveLeft();
         else if (keyCode == KeyEvent.VK_KP_RIGHT || keyCode == KeyEvent.VK_RIGHT)
-            player.faceRight();
+            player.moveRight();
         else if (keyCode == KeyEvent.VK_R && isGameOver)
             reset();
         else if (keyCode == KeyEvent.VK_X)
@@ -50,12 +52,16 @@ public class Game extends Observable {
     }
 
     public void draw(Graphics g){
-
+        player.paint(g);
     }
 
     // restarts the entire game
     private void reset(){
 
+    }
+
+    public boolean isOver(){
+        return isGameOver;
     }
 
 
