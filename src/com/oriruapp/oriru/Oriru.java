@@ -12,7 +12,7 @@ public class Oriru extends JFrame{
     private Game game;
     private GamePanel gp;
 
-    private static final int INTERVAL = 10;
+    private static final int INTERVAL = 20;
     private Timer t;
 
     public Oriru(){
@@ -21,7 +21,7 @@ public class Oriru extends JFrame{
 
         // set undecorated modifies the top window bar
         setUndecorated(false);
-
+        JButton button = new JButton("click to start");
 
         setTitle("Oriru");
         game = new Game();
@@ -55,7 +55,7 @@ public class Oriru extends JFrame{
             @Override
             public void actionPerformed(ActionEvent ae) {
                 // KEEP UPDATE FOR GAME CLASS?????
-                //game.update();
+                game.update();
                 gp.repaint();
             }
         });

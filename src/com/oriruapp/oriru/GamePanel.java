@@ -63,4 +63,8 @@ public class GamePanel extends JPanel {
         int width = fm.stringWidth(str);
         g.drawString(str, (Game.WIDTH - width) / 2, yPos);
     }
+
+    private void checkCollisions(){
+
+    }
 }
