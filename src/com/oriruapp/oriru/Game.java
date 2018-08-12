@@ -5,10 +5,8 @@ package com.oriruapp.oriru;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
-import java.util.Observable;
-import java.util.Random;
 
 public class Game extends Observable {
     public static final int WIDTH = 600;
@@ -25,20 +23,33 @@ public class Game extends Observable {
         sprites = new ArrayList<Sprite>();
         player = new Player();
 
+        init();
         //player.loadImageApp();
-        sprites.add(new Sprite(50,200));
-
     }
 
     // initialize the stairs
     private void init(){
-
+        for(int i=0; i<5; ++i){
+            sprites.add(new Sprite((int)(Math.random()*WIDTH),(int)(Math.random()*HEIGHT)));
+        }
     }
 
 
     // updates the game
     public void update(){
         player.falling();
+
+        Iterator<Sprite> sprite = sprites.iterator();
+        while (sprite.hasNext()) {
+            Sprite s = sprite.next();
+            s.raising();
+            if(s.isOnScreenTop()){
+                sprite.remove();
+            }
+        }
+        if(sprites.size() <= 8){
+            sprites.add(new Sprite((int)(Math.random()*WIDTH - 50),(int)(HEIGHT - Math.random()*200)));
+        }
     }
 
     public void keyPressed(int keyCode){

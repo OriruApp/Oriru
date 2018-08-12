@@ -13,7 +13,7 @@ public class Sprite extends Component{
     private BufferedImage img;
     private int xpos;
     private int ypos;
-
+    private static int VELOCITY = 3;
 
     // every staircase have the same size
     private static int WIDTH;
@@ -33,7 +33,7 @@ public class Sprite extends Component{
     }
 
     public void loadImageApp() {
-        System.out.println("Staircase in loadImage");
+        //System.out.println("Staircase in loadImage");
         try {
             img = ImageIO.read(new File("assets/staircase.png"));
         } catch (IOException e) {
@@ -42,9 +42,15 @@ public class Sprite extends Component{
 
     }
 
+    public void raising(){
+        if(this.ypos >= -img.getHeight(null)){
+            this.ypos-= VELOCITY;
+        }
+    }
+
     @Override
     public void paint(Graphics g){
-        System.out.println("Staircase in paint");
+        //System.out.println("Staircase in paint");
         super.paint(g);
         g.drawImage(img,xpos,ypos,this);
     }
@@ -57,7 +63,14 @@ public class Sprite extends Component{
         }
     }
 
-
+    public boolean isOnScreenTop(){
+        if (ypos <= 0) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 
 
 }
