@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class Thorn extends Component{
     private BufferedImage img;
-    private int ypos = 80;
+    private int ypos = 0;
     private int xpos = 0;
     public Thorn(){
         System.out.println("building thorn");

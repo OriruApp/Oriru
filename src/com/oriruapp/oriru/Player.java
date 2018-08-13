@@ -118,7 +118,7 @@ public class Player extends Component {
     }
 
     public boolean isHit() {
-        if(this.ypos < 100 && invulnerable <= 0){
+        if(this.ypos < 30 && invulnerable <= 0){
             return true;
         }
         else {
