@@ -70,10 +70,19 @@ public class Game extends Observable {
                 sprites.add(tmp);
             }
         }
-        if (isOnPlatform) {
+        if (isOnPlatform && !player.isInvulnerable()) {
             player.raising();
         } else {
             player.falling();
+        }
+
+        if(player.isHit()){
+            player.loseHealth();
+            player.setInvulnerable(100);
+            System.out.println("Health : " + player.getHealth());
+        }
+        else{
+            player.setInvulnerable(player.getInvulnerable()-1);
         }
 
     }
