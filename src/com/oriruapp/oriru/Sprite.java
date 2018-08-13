@@ -72,6 +72,13 @@ public class Sprite extends Component{
         }
     }
 
+    public boolean isCollision(Sprite other){
+        Rectangle thisBoundingRect = this.getBounds();
+        Rectangle otherBoundingRect = other.getBounds();
+
+        return thisBoundingRect.intersects(otherBoundingRect);
+    }
+
     public int getWIDTH(){
         return WIDTH;
     }
@@ -93,6 +100,5 @@ public class Sprite extends Component{
         return new Rectangle(this.xpos, this.ypos
                 , img.getWidth(null), img.getHeight(null));
     }
-
 
 }
