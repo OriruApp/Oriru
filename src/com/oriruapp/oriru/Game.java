@@ -8,9 +8,12 @@ import java.awt.event.KeyEvent;
 import java.util.*;
 import java.util.List;
 
+import static java.lang.Thread.sleep;
+
 public class Game extends Observable {
     public static final int WIDTH = 600;
     public static final int HEIGHT = 800;
+    public static final int SPRITE_NUM = 10;
     public static final Random RANDOM = new Random();
 
 
@@ -29,9 +32,6 @@ public class Game extends Observable {
 
     // initialize the stairs
     private void init() {
-        for (int i = 0; i < 5; ++i) {
-            sprites.add(new Sprite((int) (Math.random() * WIDTH), (int) (Math.random() * HEIGHT)));
-        }
     }
 
 
@@ -52,8 +52,18 @@ public class Game extends Observable {
                 isOnPlatform = true;
             }
         }
-        if (sprites.size() <= 8) {
-            sprites.add(new Sprite((int) (Math.random() * WIDTH - 50), (int) (HEIGHT - Math.random() * 200)));
+        while (sprites.size() <= SPRITE_NUM) {
+            boolean isCollision = false;
+            Sprite tmp = new Sprite((int) (Math.random() * WIDTH - 50), (int) (HEIGHT - Math.random() * 200));
+            for(Sprite s : sprites){
+                if(tmp.isCollision(s)){
+                    isCollision = true;
+                    break;
+                }
+            }
+            if(!isCollision){
+                sprites.add(tmp);
+            }
         }
         if (isOnPlatform) {
             player.raising();
