@@ -14,6 +14,7 @@ public class Player extends Component {
     private int xpos;
     private int ypos;
     private static int VELOCITY = 5;
+    private static int HORIZONTALVELOCITY = 10;
     private static int SPRITE_VELOCITY = 3;
     private static int PLAYERHEIGHT = 16;
 
@@ -59,11 +60,11 @@ public class Player extends Component {
     }
 
     public void moveLeft() {
-        xpos -= VELOCITY;
+        xpos -= HORIZONTALVELOCITY;
     }
 
     public void moveRight() {
-        xpos += VELOCITY;
+        xpos += HORIZONTALVELOCITY;
     }
 
     public void falling() {
@@ -73,7 +74,7 @@ public class Player extends Component {
         // if statement here to help debugging; will be removed later.
         //System.out.println(isOnPlatform(s));
         if (ypos < 800 - PLAYERHEIGHT) {
-            ypos += 1;
+            ypos += VELOCITY;
 
             //System.out.println(ypos);
         }

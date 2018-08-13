@@ -11,6 +11,7 @@ public class Oriru extends JFrame{
 
     private Game game;
     private GamePanel gp;
+    private StartPanel sp;
 
     private static final int INTERVAL = 20;
     private Timer t;
@@ -21,12 +22,17 @@ public class Oriru extends JFrame{
 
         // set undecorated modifies the top window bar
         setUndecorated(false);
-        JButton button = new JButton("click to start");
+        //JButton button = new JButton("click to start");
 
         setTitle("Oriru");
+//        sp = new StartPanel();
+//        if(sp.getButton().getModel().isPressed()){
+//
+//        }
         game = new Game();
         gp = new GamePanel(game);
         add(gp);
+
 
         addKeyListener(new KeyHandler());
         pack();

@@ -17,11 +17,16 @@ public class Game extends Observable {
     private List<Sprite> sprites;
     private static Player player;
     private boolean isGameOver;
+    Thorn th;
+    StartPanel sp;
 
 
     Game() {
         sprites = new ArrayList<Sprite>();
+
+        //sp = new StartPanel();
         player = new Player();
+        th = new Thorn();
 
         init();
         //player.loadImageApp();
@@ -38,7 +43,7 @@ public class Game extends Observable {
     // updates the game
     public void update() {
         boolean isOnPlatform = false;
-
+        sp= new StartPanel();
         Iterator<Sprite> sprite = sprites.iterator();
         while (sprite.hasNext()) {
             Sprite s = sprite.next();
