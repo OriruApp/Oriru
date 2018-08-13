@@ -39,9 +39,9 @@ public class GamePanel extends JPanel {
         drawGame(g);
 
 
-        if (game.isOver()) {
-            gameOver(g);
-        }
+//        if (game.isOver()) {
+//            gameOver(g);
+//        }
     }
 
     // Draws the game

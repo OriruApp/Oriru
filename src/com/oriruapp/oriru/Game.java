@@ -16,6 +16,7 @@ public class Game extends Observable {
     public static final int SPRITE_NUM = 10;
     public static final Random RANDOM = new Random();
     private static final String START = "press enter to START GAME";
+    private static final String OVER = "GAME OVER press enter to replay";
 
 
     private List<Sprite> sprites;
@@ -100,10 +101,14 @@ public class Game extends Observable {
             player.moveLeft();
         else if (keyCode == KeyEvent.VK_KP_RIGHT || keyCode == KeyEvent.VK_RIGHT)
             player.moveRight();
-        else if (keyCode == KeyEvent.VK_R && isGameOver)
+        else if (keyCode == KeyEvent.VK_ENTER && isGameOver)
             reset();
-        else if(keyCode == KeyEvent.VK_ENTER)
+        else if(keyCode == KeyEvent.VK_ENTER){
             isStarted = true;
+            isGameOver = false;
+
+        }
+
         else if (keyCode == KeyEvent.VK_X)
             System.exit(0);
     }
@@ -129,7 +134,13 @@ public class Game extends Observable {
         g.setColor(new Color( 0, 0, 0));
         g.setFont(new Font("Arial", 20, 20));
         FontMetrics fm = g.getFontMetrics();
-        centreString(START, g, fm, Game.HEIGHT / 2);
+        if(isGameOver){
+            centreString(OVER, g, fm, Game.HEIGHT / 2);
+        }
+        else{
+            centreString(START, g, fm, Game.HEIGHT / 2);
+        }
+
         g.setColor(saved);
 
     }
@@ -137,7 +148,10 @@ public class Game extends Observable {
     // restarts the entire game
     private void reset() {
         System.out.println("resetting game");
+        isStarted = true;
         isGameOver = false;
+        player = new Player();
+        player.setVisible(true);
     }
 
     // need modification later
@@ -145,6 +159,7 @@ public class Game extends Observable {
         if (player.getHealth() < 1) {
             //System.out.println("game over is true");
             isGameOver = true;
+            isStarted = false;
         }
         return isGameOver;
     }
