@@ -18,8 +18,10 @@ public class Leaderboard {
     }
 
     public String toString() {
+        PriorityQueue<LeaderboardName> tmp = new PriorityQueue<LeaderboardName>(board);
         String s = "";
-        for (LeaderboardName n : board) {
+        while(!tmp.isEmpty()) {
+            LeaderboardName n = tmp.poll();
             s += n.getKey();
             s += " ";
             s += n.getValue();

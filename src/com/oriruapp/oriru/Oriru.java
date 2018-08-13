@@ -11,7 +11,7 @@ public class Oriru extends JFrame{
 
     private Game game;
     private GamePanel gp;
-    private StartPanel sp;
+    private ScorePanel sp;
 
     private static final int INTERVAL = 20;
     private Timer t;
@@ -31,7 +31,10 @@ public class Oriru extends JFrame{
 //        }
         game = new Game();
         gp = new GamePanel(game);
+        sp = new ScorePanel(game);
+        add(sp,BorderLayout.NORTH);
         add(gp);
+
 
 
         addKeyListener(new KeyHandler());

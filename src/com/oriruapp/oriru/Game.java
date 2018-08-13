@@ -28,8 +28,8 @@ public class Game extends Observable {
 
 
     Game() {
-        leaderboard = new Leaderboard();
         sprites = new ArrayList<Sprite>();
+        leaderboard = new Leaderboard();
 
         //sp = new StartPanel();
 
@@ -154,7 +154,7 @@ public class Game extends Observable {
         FontMetrics fm = g.getFontMetrics();
         int width = fm.stringWidth(leaderboard.toString());
 
-        int x = (Game.WIDTH - 50) / 2;
+        int x = Game.WIDTH / 2 - 50;
         int y = Game.HEIGHT / 2 - 150;
 
         for (String line : leaderboard.toString().split("\n"))
