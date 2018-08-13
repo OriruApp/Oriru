@@ -131,7 +131,11 @@ public class Player extends Component {
     }
 
     public void loseHealth() {
-        health--;
+        if(isVisible()){
+            health--;
+        }
+        return;
+
     }
 
     public void raising() {

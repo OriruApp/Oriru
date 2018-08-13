@@ -13,7 +13,7 @@ import static java.lang.Thread.sleep;
 public class Game extends Observable {
     public static final int WIDTH = 600;
     public static final int HEIGHT = 800;
-    public static final int SPRITE_NUM = 10;
+    public static final int SPRITE_NUM = 7;
     public static final Random RANDOM = new Random();
     private static final String START = "press enter to START GAME";
     private static final String OVER = "GAME OVER press enter to replay";
@@ -36,7 +36,7 @@ public class Game extends Observable {
         th = new Thorn();
 
         player.setVisible(false);
-        init();
+        //init();
         //player.loadImageApp();
     }
 
