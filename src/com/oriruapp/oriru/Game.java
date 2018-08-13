@@ -19,7 +19,7 @@ public class Game extends Observable {
     private boolean isGameOver;
 
 
-    Game(){
+    Game() {
         sprites = new ArrayList<Sprite>();
         player = new Player();
 
@@ -28,16 +28,16 @@ public class Game extends Observable {
     }
 
     // initialize the stairs
-    private void init(){
-        for(int i=0; i<5; ++i){
-            sprites.add(new Sprite((int)(Math.random()*WIDTH),(int)(Math.random()*HEIGHT)));
+    private void init() {
+        for (int i = 0; i < 5; ++i) {
+            sprites.add(new Sprite((int) (Math.random() * WIDTH), (int) (Math.random() * HEIGHT)));
         }
     }
 
 
     // updates the game
-    public void update(){
-
+    public void update() {
+        boolean isOnPlatform = false;
 
         Iterator<Sprite> sprite = sprites.iterator();
         while (sprite.hasNext()) {
@@ -45,23 +45,25 @@ public class Game extends Observable {
 
             s.raising();
 
-            if(s.isOnScreenTop()){
+            if (s.isOnScreenTop()) {
                 sprite.remove();
             }
-            if(!player.isOnPlatform(s)){
-                player.falling();
-            }
-            else if(player.isOnPlatform(s)){
-                player.raising();
+            if (player.isOnPlatform(s)) {
+                isOnPlatform = true;
             }
         }
-        if(sprites.size() <= 8){
-            sprites.add(new Sprite((int)(Math.random()*WIDTH - 50),(int)(HEIGHT - Math.random()*200)));
+        if (sprites.size() <= 8) {
+            sprites.add(new Sprite((int) (Math.random() * WIDTH - 50), (int) (HEIGHT - Math.random() * 200)));
+        }
+        if (isOnPlatform) {
+            player.raising();
+        } else {
+            player.falling();
         }
 
     }
 
-    public void keyPressed(int keyCode){
+    public void keyPressed(int keyCode) {
         if (keyCode == KeyEvent.VK_KP_LEFT || keyCode == KeyEvent.VK_LEFT)
             player.moveLeft();
         else if (keyCode == KeyEvent.VK_KP_RIGHT || keyCode == KeyEvent.VK_RIGHT)
@@ -72,37 +74,35 @@ public class Game extends Observable {
             System.exit(0);
     }
 
-    public void draw(Graphics g){
+    public void draw(Graphics g) {
 
         player.paint(g);
-        for(Sprite sprite : sprites){
+        for (Sprite sprite : sprites) {
             sprite.paint(g);
         }
     }
 
     // restarts the entire game
-    private void reset(){
+    private void reset() {
         System.out.println("resetting game");
         isGameOver = false;
     }
 
     // need modification later
-    public boolean isOver(){
-        if(player.getYpos() > HEIGHT - player.getHeight()- 10){
+    public boolean isOver() {
+        if (player.getYpos() > HEIGHT - player.getHeight() - 10) {
             //System.out.println("game over is true");
             isGameOver = true;
         }
         return isGameOver;
     }
 
-    private void checkCollision(){
+    private void checkCollision() {
 //        for(Sprite s : sprites){
 //            player.falling(s);
 //        }
 
     }
-
-
 
 
 }

@@ -89,5 +89,10 @@ public class Sprite extends Component{
         return VELOCITY;
     }
 
+    public Rectangle getBounds() {
+        return new Rectangle(this.xpos, this.ypos
+                , img.getWidth(null), img.getHeight(null));
+    }
+
 
 }
