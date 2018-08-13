@@ -1,5 +1,6 @@
 package com.oriruapp.oriru;
 
+import java.io.*;
 import java.util.PriorityQueue;
 
 public class Leaderboard {
@@ -16,11 +17,42 @@ public class Leaderboard {
         }
     }
 
-    public static void main(){
-        Leaderboard lb = new Leaderboard();
-        lb.add("aa",10);
-        lb.add("bb", 11);
-        lb.add("cc", 4);
-        lb.print();
+    public PriorityQueue<LeaderboardName> getBoard(){
+        return board;
     }
+
+    public void read(String filename){
+        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+
+            String sCurrentLine;
+
+            while ((sCurrentLine = br.readLine()) != null) {
+                String[] splitLine = sCurrentLine.split(" ");
+                board.add(new LeaderboardName(splitLine[0], Integer.valueOf(splitLine[1])));
+            }
+
+        } catch (IOException e) {
+            System.out.println("Read leaderboard file error!");
+        }
+    }
+
+    public void write(String filename){
+        try (Writer writer = new BufferedWriter(new OutputStreamWriter(
+                new FileOutputStream(filename), "utf-8"))) {
+            for(LeaderboardName n : board){
+                writer.write(n.getKey() + " " + n.getValue() + "\n");
+            }
+        } catch (IOException e){
+            System.out.println("Write leaderboard file error!");
+        }
+    }
+
+    /* test
+    public static void main(String []args){
+        Leaderboard lb = new Leaderboard();
+        lb.read("leaderboard.txt");
+        lb.print();
+        lb.write("leaderboard.txt");
+    }
+    */
 }

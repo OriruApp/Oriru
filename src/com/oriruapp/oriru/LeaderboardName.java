@@ -19,7 +19,12 @@ public class LeaderboardName  implements Comparable<LeaderboardName> {
 
     @Override
     public int compareTo(LeaderboardName other) {
-        return this.getKey().compareTo(other.getKey());
+        if(this.getValue() > other.getValue())
+            return -1;
+        else if(this.getValue() < other.getValue())
+            return 1;
+        else
+            return 0;
     }
 
 }
