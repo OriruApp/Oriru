@@ -10,6 +10,7 @@ import java.io.IOException;
 public class Player extends Component {
 
     private int health = 3;
+    private int invulnerable = 0;
     private BufferedImage img;
     private int xpos;
     private int ypos;
@@ -89,6 +90,15 @@ public class Player extends Component {
 //        return PLAYERHEIGHT;
 //    }
 
+
+    public int getInvulnerable() {
+        return invulnerable;
+    }
+
+    public void setInvulnerable(int time){
+        this.invulnerable = time;
+    }
+
     public Rectangle getBounds() {
         return new Rectangle(this.xpos, this.ypos
                 , img.getWidth(null), img.getHeight(null));
@@ -99,13 +109,20 @@ public class Player extends Component {
         Rectangle thisBoundingRect = this.getBounds();
         Rectangle otherBoundingRect = other.getBounds();
 
-        System.out.println(this.getBounds());
-        System.out.println(thisBoundingRect.intersects(otherBoundingRect));
         return thisBoundingRect.intersects(otherBoundingRect);
     }
 
     public boolean isHit() {
-        return false;
+        if(this.ypos < 0 && invulnerable <= 0){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public boolean isInvulnerable(){
+        return (invulnerable > 0);
     }
 
     public void loseHealth() {
