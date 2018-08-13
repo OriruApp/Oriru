@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class Thorn extends Component{
     private BufferedImage img;
-    private int ypos = 0;
+    private int ypos = 80;
     private int xpos = 0;
     public Thorn(){
         System.out.println("building thorn");
@@ -17,7 +17,6 @@ public class Thorn extends Component{
     }
 
     public void loadImageApp() {
-        //System.out.println("Staircase in loadImage");
         try {
             img = ImageIO.read(new File("assets/spike.png"));
         } catch (IOException e) {

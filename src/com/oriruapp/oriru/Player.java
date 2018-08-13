@@ -48,8 +48,10 @@ public class Player extends Component {
     @Override
     public void paint(Graphics g) {
         //System.out.println("in paint");
-        super.paint(g);
-        g.drawImage(img, xpos, ypos, this);
+        if(isVisible()) {
+            super.paint(g);
+            g.drawImage(img, xpos, ypos, this);
+        }
     }
 
     public Dimension getPreferredSize() {
@@ -78,6 +80,9 @@ public class Player extends Component {
             ypos += VELOCITY;
 
             //System.out.println(ypos);
+        }
+        else {
+            this.health = 0;
         }
 
     }
@@ -113,7 +118,7 @@ public class Player extends Component {
     }
 
     public boolean isHit() {
-        if(this.ypos < 0 && invulnerable <= 0){
+        if(this.ypos < 100 && invulnerable <= 0){
             return true;
         }
         else {
@@ -134,6 +139,5 @@ public class Player extends Component {
             this.ypos -= SPRITE_VELOCITY;
         }
     }
-
 
 }

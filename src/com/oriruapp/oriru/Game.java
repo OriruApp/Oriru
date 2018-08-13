@@ -34,12 +34,14 @@ public class Game extends Observable {
         player = new Player();
         th = new Thorn();
 
+        player.setVisible(false);
         init();
         //player.loadImageApp();
     }
 
     // initialize the stairs
-    private void init() {
+    public void init() {
+        player.setVisible(true);
     }
 
 
@@ -81,13 +83,16 @@ public class Game extends Observable {
 
         if(player.isHit()){
             player.loseHealth();
-            player.setInvulnerable(100);
+            player.setInvulnerable(40);
             System.out.println("Health : " + player.getHealth());
         }
         else{
             player.setInvulnerable(player.getInvulnerable()-1);
         }
 
+        if(isOver()){
+            player.setVisible(false);
+        }
     }
 
     public void keyPressed(int keyCode) {
@@ -117,6 +122,7 @@ public class Game extends Observable {
             gameStart(g);
         }
 
+        th.paint(g);
     }
     private void gameStart(Graphics g){
         Color saved = g.getColor();
@@ -136,7 +142,7 @@ public class Game extends Observable {
 
     // need modification later
     public boolean isOver() {
-        if (player.getYpos() > HEIGHT - player.getHeight() - 10) {
+        if (player.getHealth() < 1) {
             //System.out.println("game over is true");
             isGameOver = true;
         }
