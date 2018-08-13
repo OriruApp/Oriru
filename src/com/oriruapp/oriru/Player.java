@@ -14,7 +14,7 @@ public class Player extends Component{
     private int xpos;
     private int ypos;
     private static int VELOCITY = 10;
-    private static int PLAYERHEIGHT = 32;
+    private static int PLAYERHEIGHT = 16;
 
 
     private static final Color COLOR = new Color(250, 128, 20);
@@ -32,7 +32,7 @@ public class Player extends Component{
         return health;
     }
     public void loadImageApp() {
-        System.out.println("in loadImage");
+        //System.out.println("in loadImage");
         try {
             img = ImageIO.read(new File("assets/man.png"));
         } catch (IOException e) {
@@ -68,8 +68,11 @@ public class Player extends Component{
 
 
         // if statement here to help debugging; will be removed later.
-        if(ypos < 600 - PLAYERHEIGHT && !isOnPlatform()){
-            ypos += 3;
+        //System.out.println(isOnPlatform(s));
+        if(ypos < 800 - PLAYERHEIGHT){
+            ypos += 1;
+
+            //System.out.println(ypos);
         }
 
     }
@@ -78,13 +81,17 @@ public class Player extends Component{
         return ypos;
     }
 
-    public int getHeight(){
-        return PLAYERHEIGHT;
-    }
+//    public int getHeight(){
+//        return PLAYERHEIGHT;
+//    }
 
     //checks if the player is standing on the platform
-    public boolean isOnPlatform(){
-        return false;
+    public boolean isOnPlatform(Sprite other){
+        Rectangle thisBoundingRect = this.getBounds();
+
+        Rectangle otherBoundingRect = other.getBounds();
+        System.out.println(thisBoundingRect.intersects(otherBoundingRect));
+        return thisBoundingRect.intersects(otherBoundingRect);
     }
 
     public boolean isHit(){
@@ -93,6 +100,12 @@ public class Player extends Component{
 
     public void loseHealth(){
         health--;
+    }
+
+    public void raising(){
+        if(this.ypos >= -img.getHeight(null)){
+            this.ypos-= VELOCITY;
+        }
     }
 
 

@@ -37,19 +37,28 @@ public class Game extends Observable {
 
     // updates the game
     public void update(){
-        player.falling();
+
 
         Iterator<Sprite> sprite = sprites.iterator();
         while (sprite.hasNext()) {
             Sprite s = sprite.next();
+
             s.raising();
+
             if(s.isOnScreenTop()){
                 sprite.remove();
+            }
+            if(!player.isOnPlatform(s)){
+                player.falling();
+            }
+            else if(player.isOnPlatform(s)){
+                player.raising();
             }
         }
         if(sprites.size() <= 8){
             sprites.add(new Sprite((int)(Math.random()*WIDTH - 50),(int)(HEIGHT - Math.random()*200)));
         }
+
     }
 
     public void keyPressed(int keyCode){
@@ -85,6 +94,15 @@ public class Game extends Observable {
         }
         return isGameOver;
     }
+
+    private void checkCollision(){
+//        for(Sprite s : sprites){
+//            player.falling(s);
+//        }
+
+    }
+
+
 
 
 }

@@ -72,5 +72,22 @@ public class Sprite extends Component{
         }
     }
 
+    public int getWIDTH(){
+        return WIDTH;
+    }
+    public int getHEIGHT(){
+        return HEIGHT;
+    }
+    public int getXpos(){
+        return xpos;
+    }
+    public int getYpos(){
+        return ypos;
+    }
+
+    public int getStairVelocity(){
+        return VELOCITY;
+    }
+
 
 }
