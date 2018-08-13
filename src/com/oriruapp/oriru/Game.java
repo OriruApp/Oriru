@@ -18,7 +18,7 @@ public class Game extends Observable {
     private static final String START = "press enter to START GAME";
     private static final String OVER = "GAME OVER press enter to replay";
 
-
+    private Leaderboard leaderboard;
     private List<Sprite> sprites;
     private static Player player;
     private boolean isGameOver;
@@ -28,6 +28,7 @@ public class Game extends Observable {
 
 
     Game() {
+        leaderboard = new Leaderboard();
         sprites = new ArrayList<Sprite>();
 
         //sp = new StartPanel();
@@ -35,14 +36,14 @@ public class Game extends Observable {
         player = new Player();
         th = new Thorn();
 
-        player.setVisible(false);
+
+        leaderboard.read("leaderboard.txt");
         init();
         //player.loadImageApp();
     }
 
     // initialize the stairs
     public void init() {
-        player.setVisible(true);
     }
 
 
@@ -135,7 +136,8 @@ public class Game extends Observable {
         g.setFont(new Font("Arial", 20, 20));
         FontMetrics fm = g.getFontMetrics();
         if(isGameOver){
-            centreString(OVER, g, fm, Game.HEIGHT / 2);
+            centreString(OVER, g, fm, Game.HEIGHT / 2 - 150);
+            printLeaderboard(g);
         }
         else{
             centreString(START, g, fm, Game.HEIGHT / 2);
@@ -143,6 +145,20 @@ public class Game extends Observable {
 
         g.setColor(saved);
 
+    }
+
+    private void printLeaderboard(Graphics g){
+        Color saved = g.getColor();
+        g.setColor(new Color( 0, 0, 0));
+        g.setFont(new Font("Arial", 20, 20));
+        FontMetrics fm = g.getFontMetrics();
+        int width = fm.stringWidth(leaderboard.toString());
+
+        int x = (Game.WIDTH - 50) / 2;
+        int y = Game.HEIGHT / 2 - 150;
+
+        for (String line : leaderboard.toString().split("\n"))
+            g.drawString(line, x, y += g.getFontMetrics().getHeight());
     }
 
     // restarts the entire game
