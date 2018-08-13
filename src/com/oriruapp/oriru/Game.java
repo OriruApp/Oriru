@@ -15,11 +15,13 @@ public class Game extends Observable {
     public static final int HEIGHT = 800;
     public static final int SPRITE_NUM = 10;
     public static final Random RANDOM = new Random();
+    private static final String START = "press enter to START GAME";
 
 
     private List<Sprite> sprites;
     private static Player player;
     private boolean isGameOver;
+    private boolean isStarted = false;
     Thorn th;
     StartPanel sp;
 
@@ -28,6 +30,7 @@ public class Game extends Observable {
         sprites = new ArrayList<Sprite>();
 
         //sp = new StartPanel();
+
         player = new Player();
         th = new Thorn();
 
@@ -43,7 +46,7 @@ public class Game extends Observable {
     // updates the game
     public void update() {
         boolean isOnPlatform = false;
-        sp= new StartPanel();
+        //sp= new StartPanel();
         Iterator<Sprite> sprite = sprites.iterator();
         while (sprite.hasNext()) {
             Sprite s = sprite.next();
@@ -85,16 +88,35 @@ public class Game extends Observable {
             player.moveRight();
         else if (keyCode == KeyEvent.VK_R && isGameOver)
             reset();
+        else if(keyCode == KeyEvent.VK_ENTER)
+            isStarted = true;
         else if (keyCode == KeyEvent.VK_X)
             System.exit(0);
     }
 
     public void draw(Graphics g) {
 
-        player.paint(g);
+        //player.paint(g);
         for (Sprite sprite : sprites) {
             sprite.paint(g);
         }
+
+        if(isStarted){
+            player.paint(g);
+        }
+        else{
+            gameStart(g);
+        }
+
+    }
+    private void gameStart(Graphics g){
+        Color saved = g.getColor();
+        g.setColor(new Color( 0, 0, 0));
+        g.setFont(new Font("Arial", 20, 20));
+        FontMetrics fm = g.getFontMetrics();
+        centreString(START, g, fm, Game.HEIGHT / 2);
+        g.setColor(saved);
+
     }
 
     // restarts the entire game
@@ -118,6 +140,16 @@ public class Game extends Observable {
 //        }
 
     }
+
+    // Centres a string on the screen
+    // modifies: g
+    // effects:  centres the string str horizontally onto g at vertical position yPos
+    private void centreString(String str, Graphics g, FontMetrics fm, int yPos) {
+        int width = fm.stringWidth(str);
+        g.drawString(str, (Game.WIDTH - width) / 2, yPos);
+    }
+
+
 
 
 }

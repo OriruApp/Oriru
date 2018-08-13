@@ -1,8 +1,11 @@
 package com.oriruapp.oriru;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 
 // panel where game is rendered
@@ -13,6 +16,10 @@ public class GamePanel extends JPanel {
 
     private static final String OVER = "Game Over!";
     private static final String REPLAY = "press to replay";
+
+
+    private boolean isPlaying = false; // checks if game started
+    private JButton startButton;
 
     private Game game;
 
@@ -30,6 +37,7 @@ public class GamePanel extends JPanel {
         super.paintComponent(g);
 
         drawGame(g);
+
 
         if (game.isOver()) {
             gameOver(g);
@@ -55,6 +63,8 @@ public class GamePanel extends JPanel {
         centreString(REPLAY, g, fm, Game.HEIGHT / 2 + 50);
         g.setColor(saved);
     }
+
+
 
     // Centres a string on the screen
     // modifies: g
