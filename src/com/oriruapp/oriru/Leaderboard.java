@@ -7,21 +7,34 @@ public class Leaderboard {
 
     private PriorityQueue<LeaderboardName> board = new PriorityQueue<>();
 
-    public void add(String name, int score){
+    public void add(String name, int score) {
         board.add(new LeaderboardName(name, score));
     }
 
-    public void print(){
-        for(LeaderboardName n : board){
+    public void print() {
+        for (LeaderboardName n : board) {
             System.out.println(n.getKey() + " " + n.getValue());
         }
     }
 
-    public PriorityQueue<LeaderboardName> getBoard(){
+    public String toString() {
+        PriorityQueue<LeaderboardName> tmp = new PriorityQueue<LeaderboardName>(board);
+        String s = "";
+        while(!tmp.isEmpty()) {
+            LeaderboardName n = tmp.poll();
+            s += n.getKey();
+            s += " ";
+            s += n.getValue();
+            s += "\n";
+        }
+        return s;
+    }
+
+    public PriorityQueue<LeaderboardName> getBoard() {
         return board;
     }
 
-    public void read(String filename){
+    public void read(String filename) {
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
 
             String sCurrentLine;
@@ -36,13 +49,13 @@ public class Leaderboard {
         }
     }
 
-    public void write(String filename){
+    public void write(String filename) {
         try (Writer writer = new BufferedWriter(new OutputStreamWriter(
                 new FileOutputStream(filename), "utf-8"))) {
-            for(LeaderboardName n : board){
+            for (LeaderboardName n : board) {
                 writer.write(n.getKey() + " " + n.getValue() + "\n");
             }
-        } catch (IOException e){
+        } catch (IOException e) {
             System.out.println("Write leaderboard file error!");
         }
     }
