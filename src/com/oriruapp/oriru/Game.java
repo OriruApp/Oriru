@@ -36,7 +36,7 @@ public class Game extends Observable {
         th = new Thorn();
 
         player.setVisible(false);
-        //init();
+        init();
         //player.loadImageApp();
     }
 
