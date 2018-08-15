@@ -23,8 +23,13 @@ public class Game extends Observable {
     private static Player player;
     private boolean isGameOver;
     private boolean isStarted = false;
+    private int score;
     Thorn th;
     StartPanel sp;
+
+    public static final String EVENT_PLAYER_HIT = "PLAYER IS HIT";
+    public static final String EVENT_GAME_START = "STARTING GAME";
+    public static final String EVENT_SCORE = "SCORE UPDATED";
 
 
     Game() {
@@ -35,10 +40,11 @@ public class Game extends Observable {
 
         player = new Player();
         th = new Thorn();
-
+        score = 0;
 
         leaderboard.read("leaderboard.txt");
         init();
+
         //player.loadImageApp();
     }
 
@@ -51,6 +57,7 @@ public class Game extends Observable {
     public void update() {
         boolean isOnPlatform = false;
         //sp= new StartPanel();
+
         Iterator<Sprite> sprite = sprites.iterator();
         while (sprite.hasNext()) {
             Sprite s = sprite.next();
@@ -86,6 +93,8 @@ public class Game extends Observable {
         if(player.isHit()){
             player.loseHealth();
             player.setInvulnerable(40);
+            setChanged();
+            notifyObservers(EVENT_PLAYER_HIT);
             System.out.println("Health : " + player.getHealth());
         }
         else{
@@ -95,6 +104,9 @@ public class Game extends Observable {
         if(isOver()){
             player.setVisible(false);
         }
+        score++;
+        setChanged();
+        notifyObservers(EVENT_SCORE);
     }
 
     public void keyPressed(int keyCode) {
@@ -131,6 +143,8 @@ public class Game extends Observable {
         th.paint(g);
     }
     private void gameStart(Graphics g){
+        setChanged();
+        notifyObservers(EVENT_GAME_START);
         Color saved = g.getColor();
         g.setColor(new Color( 0, 0, 0));
         g.setFont(new Font("Arial", 20, 20));
@@ -194,6 +208,7 @@ public class Game extends Observable {
         int width = fm.stringWidth(str);
         g.drawString(str, (Game.WIDTH - width) / 2, yPos);
     }
+
 
 
 

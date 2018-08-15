@@ -6,6 +6,7 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Observable;
 
 public class Player extends Component {
 
@@ -18,6 +19,7 @@ public class Player extends Component {
     private static int HORIZONTALVELOCITY = 10;
     private static int SPRITE_VELOCITY = 3;
     private static int PLAYERHEIGHT = 16;
+
 
 
     private static final Color COLOR = new Color(250, 128, 20);

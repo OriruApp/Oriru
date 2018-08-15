@@ -31,10 +31,10 @@ public class Oriru extends JFrame{
 //        }
         game = new Game();
         gp = new GamePanel(game);
-        sp = new ScorePanel(game);
+        sp = new ScorePanel();
         add(sp,BorderLayout.NORTH);
         add(gp);
-
+        game.addObserver(sp);
 
 
         addKeyListener(new KeyHandler());
@@ -66,6 +66,7 @@ public class Oriru extends JFrame{
                 // KEEP UPDATE FOR GAME CLASS?????
                 game.update();
                 gp.repaint();
+
             }
         });
     }
